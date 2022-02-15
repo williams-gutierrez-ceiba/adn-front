@@ -30,7 +30,7 @@ export class ManejadorError implements ErrorHandler {
       path: window.location.href,
       mensaje,
     };
-    if (!environment.production) {
+    if (!environment.productos.production) {
       window.console.error('Error inesperado:\n', respuesta);
     }
   }

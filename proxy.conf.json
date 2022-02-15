@@ -2,6 +2,21 @@
   "/prospectos-vida": {
     "target": "http://192.168.1.115:9002",
     "logLevel": "debug"
+  },
+  "/usuarios": {
+    "target": "http://localhost:8081/usuarios/usuarios",
+    "logLevel": "debug"
+  },
+  "/archivos": {
+    "target": "http://localhost:8082/archivos/archivos",
+    "logLevel": "debug"
+  },
+  "/viviendas": {
+    "target": "http://localhost:8083/viviendas/viviendas",
+    "logLevel": "debug"
+  },
+  "/reservas": {
+    "target": "http://localhost:8084/reservas/reservas",
+    "logLevel": "debug"
   }
-
 }

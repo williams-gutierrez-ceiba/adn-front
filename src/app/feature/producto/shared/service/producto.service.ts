@@ -10,16 +10,16 @@ export class ProductoService {
   constructor(protected http: HttpService) {}
 
   public consultar() {
-    return this.http.doGet<Producto[]>(`${environment.endpoint}/tiposFamilia`, this.http.optsName('consultar productos'));
+    return this.http.doGet<Producto[]>(`${environment.productos.endpoint}/tiposFamilia`, this.http.optsName('consultar productos'));
   }
 
   public guardar(producto: Producto) {
-    return this.http.doPost<Producto, boolean>(`${environment.endpoint}/productos`, producto,
+    return this.http.doPost<Producto, boolean>(`${environment.productos.endpoint}/productos`, producto,
                                                 this.http.optsName('crear/actualizar productos'));
   }
 
   public eliminar(producto: Producto) {
-    return this.http.doDelete<boolean>(`${environment.endpoint}/productos/${producto.id}`,
+    return this.http.doDelete<boolean>(`${environment.productos.endpoint}/productos/${producto.id}`,
                                                  this.http.optsName('eliminar productos'));
   }
 }

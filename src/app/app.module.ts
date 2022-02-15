@@ -9,6 +9,7 @@ import { CoreModule } from '@core/core.module';
 import { CookieService } from 'ngx-cookie-service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ErrorPageComponent } from './feature/shared/error-page/error-page.component';
+import { MaterialModule } from './feature/material/material.module';
 
 
 
@@ -24,7 +25,8 @@ import { ErrorPageComponent } from './feature/shared/error-page/error-page.compo
     AppRoutingModule,
     ProductoModule,
     CoreModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MaterialModule
   ],
   providers: [CookieService],
     bootstrap: [AppComponent],
