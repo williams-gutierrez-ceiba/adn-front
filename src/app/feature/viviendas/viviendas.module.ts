@@ -6,7 +6,7 @@ import { ViviendasRoutingModule } from './viviendas-routing.module';
 import { AgregarComponent } from './pages/agregar/agregar.component';
 import { BuscarComponent } from './pages/buscar/buscar.component';
 import { ViviendaComponent } from './pages/vivienda/vivienda.component';
-import { HomeComponent } from './pages/home/home.component';
+//import { HomeComponent } from './pages/home/home.component';
 import { ListadoComponent } from './pages/listado/listado.component';
 import { MaterialModule } from '../material/material.module';
 
@@ -18,7 +18,7 @@ import { MaterialModule } from '../material/material.module';
     AgregarComponent,
     BuscarComponent,
     ViviendaComponent,
-    HomeComponent,
+    //HomeComponent,
     ListadoComponent
   ],
   imports: [

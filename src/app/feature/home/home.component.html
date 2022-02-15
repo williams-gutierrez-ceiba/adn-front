@@ -1,14 +1,29 @@
-<h1>ViviendasApp</h1>
-<p>home works!</p>
-<mat-drawer-container fullscreen>
-    <mat-sidenav>
-        <h1>
-            Sidenav
-        </h1>
+<!--
+<mat-sidenav-container fullscreen>
+    <mat-sidenav #sidenav mode="push" >
+
+        <mat-toolbar>
+            <span>Menú</span>
+            <button mat-icon-button (click)="sidenav.toggle()" >
+                <mat-icon>menu</mat-icon>
+            </button>
+        </mat-toolbar>
+
+        <mat-nav-list>
+            <a routerLink="../viviendas/listado"
+                mat-list-item 
+                (click)="sidenav.toggle()">
+                <mat-icon mat-list-icon>label</mat-icon>
+                <span>Viviendas</span>
+            </a>
+        </mat-nav-list>
+
     </mat-sidenav>
     <mat-toolbar>
-        <button mat-icon-button>
+        <button mat-icon-button (click)="sidenav.toggle()" >
             <mat-icon>menu</mat-icon>
         </button>
     </mat-toolbar>
-</mat-drawer-container>
+    <router-outlet></router-outlet>
+</mat-sidenav-container>
+-->
