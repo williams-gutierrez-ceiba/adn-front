@@ -11,7 +11,9 @@ export class ViviendaService {
   constructor( protected http: HttpService ) {}
 
   public listar() {
-    return this.http.doGet<Vivienda[]>(environment.viviendas.endpoint, 
+    // return this.http.doGet<Vivienda[]>(environment.viviendas.endpoint, 
+    //                                     this.http.optsName('consultar viviendas'));
+    return this.http.doGet<Vivienda[]>(`http://localhost:8083/viviendas/viviendas`, 
                                         this.http.optsName('consultar viviendas'));
   }
 
@@ -19,6 +21,5 @@ export class ViviendaService {
     return this.http.doGet<Vivienda>(`${environment.viviendas.endpoint}/${vivienda.id}`, 
                                         this.http.optsName('consultar vivienda'));
   }
-
 
 }

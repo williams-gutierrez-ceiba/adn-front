@@ -18,7 +18,7 @@ export const environment = {
   },
   "archivos" : {
     production: false,
-    endpoint: '/archivos'
+    endpoint: 'http://localhost:8082/archivos'
   },
   "viviendas" : {
     production: false,
