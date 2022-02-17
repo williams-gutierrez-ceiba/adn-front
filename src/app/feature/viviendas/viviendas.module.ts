@@ -9,6 +9,7 @@ import { ViviendaComponent } from './pages/vivienda/vivienda.component';
 //import { HomeComponent } from './pages/home/home.component';
 import { ListadoComponent } from './pages/listado/listado.component';
 import { MaterialModule } from '../material/material.module';
+import { ViviendaTarjetaComponent } from './pages/viviendatarjeta/vivienda-tarjeta/vivienda-tarjeta.component';
 
 
 
@@ -19,7 +20,8 @@ import { MaterialModule } from '../material/material.module';
     BuscarComponent,
     ViviendaComponent,
     //HomeComponent,
-    ListadoComponent
+    ListadoComponent,
+    ViviendaTarjetaComponent
   ],
   imports: [
     CommonModule,

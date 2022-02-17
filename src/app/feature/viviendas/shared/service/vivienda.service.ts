@@ -13,12 +13,12 @@ export class ViviendaService {
   public listar() {
     // return this.http.doGet<Vivienda[]>(environment.viviendas.endpoint, 
     //                                     this.http.optsName('consultar viviendas'));
-    return this.http.doGet<Vivienda[]>(`http://localhost:8083/viviendas/viviendas`, 
+    return this.http.doGet<Vivienda[]>(`${environment.viviendas.endpoint}/viviendas`, 
                                         this.http.optsName('consultar viviendas'));
   }
 
-  public consultarPorId(vivienda: Vivienda) {
-    return this.http.doGet<Vivienda>(`${environment.viviendas.endpoint}/${vivienda.id}`, 
+  public consultarPorId(id: number) {
+    return this.http.doGet<Vivienda>(`${environment.viviendas.endpoint}/viviendas/${id}`, 
                                         this.http.optsName('consultar vivienda'));
   }
 

@@ -22,7 +22,7 @@ export const environment = {
   },
   "viviendas" : {
     production: false,
-    endpoint: '/viviendas'
+    endpoint: 'http://localhost:8083/viviendas'
   },
   "reservas" : {
     production: false,
