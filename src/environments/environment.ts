@@ -26,7 +26,7 @@ export const environment = {
   },
   "reservas" : {
     production: false,
-    endpoint: '/reservas'
+    endpoint: 'http://localhost:8084/reservas'
   }
 }
 
