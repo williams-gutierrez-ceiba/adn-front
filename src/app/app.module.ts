@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 //import { HomeComponent } from '@home/home.component';
 //import { HomeComponent } from './feature/viviendas/pages/home/home.component';
+import { UsuarioModule } from './feature/usuario/usuario.module';
 import { ProductoModule } from '@producto/producto.module';
 import { CoreModule } from '@core/core.module';
 import { CookieService } from 'ngx-cookie-service';
@@ -29,7 +30,8 @@ import { HomeComponent } from './feature/viviendas/pages/home/home.component';
     ProductoModule,
     CoreModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    UsuarioModule
   ],
   providers: [CookieService],
     bootstrap: [AppComponent],

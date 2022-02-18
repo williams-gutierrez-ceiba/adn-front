@@ -7,5 +7,38 @@
 </mat-grid-list>
 
 <ng-template #divVivienda>
-    {{ vivienda | json }}
+    <h1>
+        Ciudad: 
+        <strong> {{vivienda.ciudad}} </strong>
+    </h1>
+    <h1>
+        Departamento: 
+        <strong> {{vivienda.departamento}} </strong>
+    </h1>
+    <h1>
+        Costo diario: 
+        <strong> {{vivienda.costoDiario | currency}} COP </strong>
+    </h1>
+    <mat-divider></mat-divider>
+    <br>
+    <mat-grid-list cols="2" rowHeight="2:1">
+        <div>
+            <mat-grid-tile>
+                <img mat-card-image src="{{vivienda.archivos[0].ruta}}">
+            </mat-grid-tile>
+        </div>
+        <div>
+            <mat-grid-tile>
+                <mat-list>
+                    <mat-list-item> Aire Acondicionado: {{ vivienda.aireAcondicionado }} </mat-list-item>
+                    <mat-list-item> Admite Mascotas: {{ vivienda.admiteMascotas }} </mat-list-item>
+                    <mat-list-item> Calefacción:  {{ vivienda.calefaccion }} </mat-list-item>
+                    <mat-list-item> Número de habitaciones {{ vivienda.numeroHabitaciones }} </mat-list-item>
+                    <mat-list-item> Número de baños: {{ vivienda.numeroBanios }} </mat-list-item>
+                    <mat-list-item> Número de personas: {{ vivienda.numeroPersonas }} </mat-list-item>
+                </mat-list>
+            </mat-grid-tile>
+        </div>
+
+    </mat-grid-list>
 </ng-template>

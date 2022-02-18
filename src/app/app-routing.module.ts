@@ -9,6 +9,8 @@ import { ErrorPageComponent } from './feature/shared/error-page/error-page.compo
 
 const routes: Routes = [
   { path: 'auth', loadChildren: () => import('./feature/auth/auth.module').then(mod => mod.AuthModule) },
+  { path: 'usuarios', loadChildren: () => import('./feature/usuario/usuario.module').then(mod => mod.UsuarioModule) },
+  { path: 'reservas', loadChildren: () => import('./feature/reserva/reserva.module').then(mod => mod.ReservaModule) },
   { path: 'viviendas', loadChildren: () => import('./feature/viviendas/viviendas.module').then(mod => mod.ViviendasModule) },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   //{ path: 'home', component: HomeComponent, canActivate: [SecurityGuard]  },
@@ -19,8 +21,8 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  //imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],
+  // imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

@@ -14,7 +14,7 @@ export const environment = {
   },
   "usuarios" : {
     production: false,
-    endpoint: '/usuarios'
+    endpoint: 'http://localhost:8081/usuarios'
   },
   "archivos" : {
     production: false,

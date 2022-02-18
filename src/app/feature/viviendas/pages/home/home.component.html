@@ -20,11 +20,20 @@
         </mat-nav-list>
 
         <mat-nav-list>
-            <a routerLink="../viviendas/1"
+            <a routerLink="../reservas/listar"
                 mat-list-item 
                 (click)="sidenav.toggle()">
                 <mat-icon mat-list-icon>today</mat-icon>
                 <span>Reservas</span>
+            </a>
+        </mat-nav-list>
+
+        <mat-nav-list>
+            <a routerLink="../usuarios/crear"
+                mat-list-item 
+                (click)="sidenav.toggle()">
+                <mat-icon mat-list-icon>account_circle</mat-icon>
+                <span>Registarse</span>
             </a>
         </mat-nav-list>
 

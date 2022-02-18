@@ -8,7 +8,9 @@ import { ArchivoService } from '../../../archivo/shared/service/archivo.service'
 @Component({
   selector: 'app-vivienda',
   templateUrl: './vivienda.component.html',
-  styles: [
+  styles: [`
+
+  `
   ]
 })
 export class ViviendaComponent implements OnInit {
@@ -16,6 +18,8 @@ export class ViviendaComponent implements OnInit {
   id: number;
   vivienda!: Vivienda;
   archivos!: Archivo[];
+
+  isLinear = false;
 
   constructor(private activatedRoute: ActivatedRoute,
               private viviendaService: ViviendaService,
@@ -37,6 +41,7 @@ export class ViviendaComponent implements OnInit {
                 .subscribe(archivos => {
                   console.log(archivos);
                   this.archivos = archivos;
+                  this.vivienda.archivos = archivos;
 
                 })
           })
