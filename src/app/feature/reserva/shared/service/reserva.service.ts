@@ -18,7 +18,7 @@ export class ReservaService {
   public crear(reserva: Reserva) {
     return this.http.doPost<Reserva,number>(`${environment.reservas.endpoint}/reservas`, 
                                               reserva,
-                                              this.http.optsName('crear usuario'));
+                                              this.http.optsName('crear reserva'));
   }
 
 }

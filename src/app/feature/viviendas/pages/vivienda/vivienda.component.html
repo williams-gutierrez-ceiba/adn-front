@@ -39,6 +39,14 @@
                 </mat-list>
             </mat-grid-tile>
         </div>
-        
     </mat-grid-list>
+    <br>
+    <mat-divider></mat-divider>
+    <br>
+    <button 
+        mat-raised-button color="primary"
+        [routerLink]="['/reservas/crear', vivienda.id]">
+        <mat-icon> shopping_cart </mat-icon>
+        Reservar
+    </button>
 </ng-template>

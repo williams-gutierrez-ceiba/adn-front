@@ -10,8 +10,8 @@ const rutas : Routes = [
     path: '',
     component: HomeComponent,
     children: [   
-      {path: 'crear', component: CrearComponent},
       {path: 'listar', component: ListarComponent},
+      {path: 'crear/:viviendaId', component: CrearComponent},
       {path: '**', redirectTo: 'listar'}
     ]
   }
