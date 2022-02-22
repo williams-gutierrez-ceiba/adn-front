@@ -7,7 +7,7 @@ import { Usuario } from '../model/usuario';
   providedIn: 'root'
 })
 export class UsuarioService {
-
+ 
   constructor( protected http: HttpService ) { }
 
   public listar() {
@@ -16,7 +16,7 @@ export class UsuarioService {
   }
 
   public crear(usuario: Usuario) {
-    return this.http.doPost<Usuario,number>(`${environment.usuarios.endpoint}/usuarios`, 
+    return this.http.doPost<Usuario,boolean>(`${environment.usuarios.endpoint}/usuarios`, 
                                               usuario,
                                               this.http.optsName('crear usuario'));
   }

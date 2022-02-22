@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Usuario } from '../../shared/model/usuario';
+import { UsuarioService } from '../../shared/service/usuario.service';
 
 @Component({
   selector: 'app-crear',
@@ -18,7 +19,8 @@ export class CrearComponent implements OnInit {
 
   usuario: Usuario = new Usuario();
 
-  constructor( private formBuilder: FormBuilder ) { }
+  constructor( private formBuilder: FormBuilder,
+               private usuarioService: UsuarioService ) { }
 
   ngOnInit(): void {
     this.construirFormularioUsuario();
@@ -42,7 +44,13 @@ export class CrearComponent implements OnInit {
     this.usuario.correoElectronico = this.formGroup.get('correoElectronico').value;
     this.usuario.tipoDocumento = this.formGroup.get('tipoDocumento').value;
     this.usuario.numeroDocumento = this.formGroup.get('numeroDocumento').value;
-    console.log(this.usuario);
+
+
+    this.usuarioService.crear(this.usuario).subscribe(resp => {
+      console.log(resp)
+      error => console.log('http error',error);
+    });      
+
   }
 
 }
