@@ -3,7 +3,7 @@
     <mat-sidenav #sidenav mode="push" >
 
         <mat-toolbar>
-            <span>Menú</span>
+            <span> Menú </span>
             <span class="spacer"></span>
             <button mat-icon-button (click)="sidenav.toggle()" >
                 <mat-icon>menu</mat-icon>
@@ -15,7 +15,7 @@
                 mat-list-item 
                 (click)="sidenav.toggle()">
                 <mat-icon mat-list-icon>home</mat-icon>
-                <span>Viviendas</span>
+                <span> Viviendas </span>
             </a>
         </mat-nav-list>
 
@@ -24,7 +24,7 @@
                 mat-list-item 
                 (click)="sidenav.toggle()">
                 <mat-icon mat-list-icon>today</mat-icon>
-                <span>Reservas</span>
+                <span> Reservas </span>
             </a>
         </mat-nav-list>
 
@@ -33,7 +33,16 @@
                 mat-list-item 
                 (click)="sidenav.toggle()">
                 <mat-icon mat-list-icon>account_circle</mat-icon>
-                <span>Registarse</span>
+                <span> Registarse </span>
+            </a>
+        </mat-nav-list>
+
+        <mat-nav-list>
+            <a routerLink="../auth/login"
+                mat-list-item 
+                (click)="sidenav.toggle()">
+                <mat-icon mat-list-icon>account_circle</mat-icon>
+                <span> Ingresar </span>
             </a>
         </mat-nav-list>
 
@@ -47,7 +56,8 @@
 
         <span class="spacer"></span>
 
-        <button mat-button>
+        <button mat-button
+                (click)="salir()">
             Salir
         </button>
 
