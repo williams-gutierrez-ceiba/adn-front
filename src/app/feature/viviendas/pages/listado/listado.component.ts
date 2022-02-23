@@ -13,16 +13,16 @@ import { Observable, forkJoin } from 'rxjs';
 })
 export class ListadoComponent implements OnInit {
 
-  viviendas : Vivienda[] = [];
-  archivos : Archivo[] = [];
+  viviendas: Vivienda[] = [];
+  archivos: Archivo[] = [];
 
   constructor(private viviendaService: ViviendaService,
               private archivoService: ArchivoService ) { }
 
   ngOnInit(): void {
 
-      let obsViviendas = this.obtenerViviendas();
-      let obsArchivos = this.obtenerArchivos();
+      const obsViviendas = this.obtenerViviendas();
+      const obsArchivos = this.obtenerArchivos();
 
       forkJoin([obsViviendas, obsArchivos]).subscribe(resp => {
         this.viviendas = resp[0];
@@ -41,11 +41,11 @@ export class ListadoComponent implements OnInit {
   }
 
   asignarArchivosAViviendas() {
-    let copiaViviendas: Vivienda[] = this.viviendas;
-    let copiaArchivos: Archivo[] = this.archivos;
+    const copiaViviendas: Vivienda[] = this.viviendas;
+    const copiaArchivos: Archivo[] = this.archivos;
     for (let i = 0; i < copiaViviendas.length; i++) {
       copiaViviendas[i].archivos = copiaArchivos
-        .filter(archivo => archivo.viviendaId == copiaViviendas[i].id);
+        .filter(archivo => archivo.viviendaId === copiaViviendas[i].id);
     }
     this.viviendas = copiaViviendas;
   }

@@ -1,5 +1,6 @@
 export class Archivo {
-    id:         number;
+    id: number;
     viviendaId: number;
-    ruta:       string;
+    ruta: string;
+
 }

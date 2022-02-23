@@ -5,11 +5,11 @@ import { CrearComponent } from './components/crear/crear.component';
 import { RouterModule, Routes } from '@angular/router';
 import { ListarComponent } from './components/listar/listar.component';
 
-const rutas : Routes = [
+const rutas: Routes = [
   {
     path: '',
     component: HomeComponent,
-    children: [   
+    children: [
       {path: 'listar', component: ListarComponent},
       {path: 'crear/:viviendaId', component: CrearComponent},
       {path: '**', redirectTo: 'listar'}

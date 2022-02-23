@@ -14,9 +14,9 @@ export class CrearComponent implements OnInit {
   formGroup: FormGroup;
 
   tiposDeDocumento = [
-    {id: "CC", descripcion: "Cédula de ciudadanía"},
-    {id: "TI", descripcion: "Tarjeta de identidad"}
-  ]
+    {id: 'CC', descripcion: 'Cédula de ciudadanía'},
+    {id: 'TI', descripcion: 'Tarjeta de identidad'}
+  ];
 
   usuario: Usuario = new Usuario();
 
@@ -30,12 +30,12 @@ export class CrearComponent implements OnInit {
 
   construirFormularioUsuario(): void {
     this.formGroup = this.formBuilder.group({
-      'telefonoCelular': ['', [Validators.required]],
-      'nombres': ['', [Validators.required]],
-      'apellidos': ['', [Validators.required]],
-      'correoElectronico': ['', [Validators.required]],
-      'tipoDocumento': ['', [Validators.required]],
-      'numeroDocumento': ['', [Validators.required]]
+      telefonoCelular: ['', [Validators.required]],
+      nombres: ['', [Validators.required]],
+      apellidos: ['', [Validators.required]],
+      correoElectronico: ['', [Validators.required]],
+      tipoDocumento: ['', [Validators.required]],
+      numeroDocumento: ['', [Validators.required]]
     });
   }
 
@@ -54,10 +54,9 @@ export class CrearComponent implements OnInit {
       },
       error => {
         this.mostrarSnackbar(error.error.mensaje);
-        console.log('http error',error.error.mensaje);
+        console.log('http error', error.error.mensaje);
       }
-    );      
-
+    );
   }
 
   mostrarSnackbar( mensaje: string ) {

@@ -1,1 +1,49 @@
-<p>crear reserva works!</p>
+<mat-grid-list cols="1" *ngIf="(!vivienda); else divFormularioUsuario">
+    <mat-grid-tile>
+        <mat-spinner></mat-spinner>
+    </mat-grid-tile>
+</mat-grid-list>
+
+<ng-template  #divFormularioUsuario>
+<h1> Reservar </h1>
+<mat-divider></mat-divider>
+<br>
+
+<div *ngIf="!esUsuarioRegistrado" class="container" novalidate> 
+    <form [formGroup]="formGroup" class="form" (ngSubmit)="consultarUsuario()">
+        <mat-form-field class="form-element">
+            <mat-label> Teléfono Celular </mat-label>
+            <input matInput
+                   type="text" 
+                   formControlName="telefonoCelular" 
+                   required>
+        </mat-form-field>
+        <button class="button" mat-raised-button color="primary" [disabled]="!formGroup.valid">
+            <mat-icon> edit </mat-icon>
+            Ingresar
+        </button>
+    </form>
+</div>
+
+<div *ngIf="esUsuarioRegistrado" class="container" novalidate>
+    <form [formGroup]="formGroup" class="form" (ngSubmit)="crearReserva()">
+        <mat-form-field appearance="fill">
+            <mat-label>Ingrese el rango de fechas</mat-label>
+            <mat-date-range-input [formGroup]="formGroup" [rangePicker]="picker">
+            <input matStartDate formControlName="fechaInicio" placeholder="Fecha inicio">
+            <input matEndDate formControlName="fechaFin" placeholder="Fecha fin">
+            </mat-date-range-input>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+        
+            <mat-error *ngIf="formGroup.controls.fechaInicio.hasError('matStartDateInvalid')">Fecha inicio inválida</mat-error>
+            <mat-error *ngIf="formGroup.controls.fechaFin.hasError('matEndDateInvalid')">Fecha fin inválida</mat-error>
+        </mat-form-field>
+
+        <button class="button" mat-raised-button color="primary" [disabled]="!formGroup.valid">
+            <mat-icon> edit </mat-icon>
+            Agendar
+        </button>
+    </form>
+</div>
+</ng-template>

@@ -10,15 +10,13 @@ export class ArchivoService {
 
   constructor( protected http: HttpService ) { }
 
-  consultarPorViviendaId(viviendaId: number) {
-    // return this.http.doGet<Archivo[]>(`http://localhost:8082/archivos/archivos/${viviendaId}`, 
-    //                                     this.http.optsName('consultar archivos por vivienda'));
-    return this.http.doGet<Archivo[]>(`${environment.archivos.endpoint}/archivos/${viviendaId}`, 
+  consultarPorViviendaId(viviendaId: number){
+    return this.http.doGet<Archivo[]>(`${environment.archivos.endpoint}/archivos/${viviendaId}`,
                                         this.http.optsName('consultar archivos por vivienda'));
   }
 
-  listar() {
-    return this.http.doGet<Archivo[]>(`http://localhost:8082/archivos/archivos`, 
+  listar(){
+    return this.http.doGet<Archivo[]>(`http://localhost:8082/archivos/archivos`,
                                         this.http.optsName('consultar archivos'));
   }
 

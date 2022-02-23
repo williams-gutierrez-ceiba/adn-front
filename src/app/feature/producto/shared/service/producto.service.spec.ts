@@ -10,8 +10,8 @@ import { HttpResponse } from '@angular/common/http';
 describe('ProductoService', () => {
   let httpMock: HttpTestingController;
   let service: ProductoService;
-  const apiEndpointProductoConsulta = `${environment.endpoint}/tiposFamilia`;
-  const apiEndpointProductos = `${environment.endpoint}/productos`;
+  const apiEndpointProductoConsulta = `${environment.productos.endpoint}/tiposFamilia`;
+  const apiEndpointProductos = `${environment.productos.endpoint}/productos`;
 
   beforeEach(() => {
     const injector = TestBed.configureTestingModule({

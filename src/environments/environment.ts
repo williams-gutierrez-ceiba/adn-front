@@ -8,27 +8,27 @@
 };*/
 
 export const environment = {
-  "productos" : {
+  productos: {
     production: false,
     endpoint: '/prospectos-vida'
   },
-  "usuarios" : {
+  usuarios: {
     production: false,
     endpoint: 'http://localhost:8081/usuarios'
   },
-  "archivos" : {
+  archivos: {
     production: false,
     endpoint: 'http://localhost:8082/archivos'
   },
-  "viviendas" : {
+  viviendas: {
     production: false,
     endpoint: 'http://localhost:8083/viviendas'
   },
-  "reservas" : {
+  reservas: {
     production: false,
     endpoint: 'http://localhost:8084/reservas'
   }
-}
+};
 
 /*
  * For easier debugging in development mode, you can import the following file

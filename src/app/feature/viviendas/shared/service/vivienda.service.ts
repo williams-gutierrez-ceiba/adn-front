@@ -8,15 +8,15 @@ import { Vivienda } from '../model/vivienda';
 })
 export class ViviendaService {
 
-  constructor( protected http: HttpService ) {}
+  constructor(protected http: HttpService) {}
 
   public listar() {
-    return this.http.doGet<Vivienda[]>(`${environment.viviendas.endpoint}/viviendas`, 
+    return this.http.doGet<Vivienda[]>(`${environment.viviendas.endpoint}/viviendas`,
                                         this.http.optsName('consultar viviendas'));
   }
 
   public consultarPorId(id: number) {
-    return this.http.doGet<Vivienda>(`${environment.viviendas.endpoint}/viviendas/${id}`, 
+    return this.http.doGet<Vivienda>(`${environment.viviendas.endpoint}/viviendas/${id}`,
                                         this.http.optsName('consultar vivienda'));
   }
 

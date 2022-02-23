@@ -4,6 +4,7 @@ import { CrearComponent } from './components/crear/crear.component';
 import { ListarComponent } from './components/listar/listar.component';
 import { ReservaRoutingModule } from './reserva-routing.module';
 import { MaterialModule } from '../material/material.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -15,7 +16,8 @@ import { MaterialModule } from '../material/material.module';
   imports: [
     CommonModule,
     ReservaRoutingModule,
-    MaterialModule
+    MaterialModule,
+    ReactiveFormsModule
   ]
 })
 export class ReservaModule { }

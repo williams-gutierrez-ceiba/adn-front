@@ -1,16 +1,115 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Usuario } from 'src/app/feature/usuario/shared/model/usuario';
+import { UsuarioService } from '../../../usuario/shared/service/usuario.service';
+import { Reserva } from '../../shared/model/reserva';
+import { ViviendaService } from '../../../viviendas/shared/service/vivienda.service';
+import { ReservaService } from '../../shared/service/reserva.service';
+import { Vivienda } from '../../../viviendas/shared/model/vivienda';
+import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-crear',
   templateUrl: './crear.component.html',
-  styles: [
-  ]
+  styleUrls: ['./crear.component.css']
 })
 export class CrearComponent implements OnInit {
 
-  constructor() { }
+  numeroTelefono: string;
+  formGroup: FormGroup;
+  usuario: Usuario = undefined;
+  usuarios: Usuario[] = [];
+  reserva: Reserva = new Reserva();
+  vivienda: Vivienda = undefined;
+  esUsuarioRegistrado = false;
+
+  constructor(private formBuilder: FormBuilder,
+              private snackBar: MatSnackBar,
+              private usuarioService: UsuarioService,
+              private viviendaService: ViviendaService,
+              private reservaService: ReservaService,
+              private activatedRoute: ActivatedRoute,
+              private router: Router) { }
 
   ngOnInit(): void {
+    this.activatedRoute.params
+    .subscribe( ({ viviendaId }) => {
+      console.log(viviendaId);
+      this.viviendaService.consultarPorId(viviendaId)
+        .subscribe( vivienda => {
+            console.log(vivienda);
+            this.vivienda = vivienda;
+        });
+    });
+    this.construirFormularioUsuario();
   }
+
+  construirFormularioUsuario(): void {
+    this.formGroup = this.formBuilder.group({
+      telefonoCelular: ['', [Validators.required]]
+    });
+  }
+
+  construirFormularioReserva() {
+    this.formGroup = this.formBuilder.group({
+      fechaInicio: ['', [Validators.required]],
+      fechaFin: ['', [Validators.required]],
+    });
+  }
+
+  consultarUsuario() {
+    this.usuarioService.listar()
+      .subscribe(
+        resp => {
+        this.usuarios = resp;
+        this.usuario = this.usuarios.find(usuario => usuario.telefonoCelular === this.formGroup.get('telefonoCelular').value);
+        if (this.usuario !== undefined) {
+          this.esUsuarioRegistrado = true;
+          this.construirFormularioReserva();
+          this.mostrarSnackbar(`Bienvenido ${this.usuario.nombres}`);
+        } else {
+          this.mostrarSnackbar('El usuario no existe');
+        }
+        console.log(this.usuarios);
+      },
+      error => {
+        this.mostrarSnackbar(error.error.mensaje);
+        console.log('http error', error.error.mensaje);
+      });
+  }
+
+  crearReserva() {
+    const fechaInicioStr = this.formGroup.get('fechaInicio').value.toString().split('T');
+    const fechaFinStr = this.formGroup.get('fechaFin').value.toString().split('T');
+    this.reserva.fechaInicio = fechaInicioStr[0];
+    this.reserva.fechaFin = fechaFinStr[0];
+    this.reserva.usuarioId = this.usuario.telefonoCelular;
+    this.reserva.viviendaId = this.vivienda.id;
+    this.reserva.valorParcial = this.vivienda.costoDiario;
+    this.reserva.valorTotal = undefined;
+
+    console.log(this.reserva);
+
+    this.reservaService.crear(this.reserva)
+      .subscribe(
+        resp => {
+        console.log(resp);
+        this.mostrarSnackbar(`Reserva creada exitosamente`);
+        this.router.navigate(['./viviendas/listado']);
+      },
+      error => {
+        this.mostrarSnackbar(error.error.mensaje);
+        console.log('http error', error.error.mensaje);
+      });
+  }
+
+  mostrarSnackbar( mensaje: string ){
+    this.snackBar.open( mensaje, 'Cerrar', {
+      duration: 3500
+    });
+  }
+
 
 }

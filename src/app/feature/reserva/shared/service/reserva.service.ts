@@ -11,12 +11,14 @@ export class ReservaService {
   constructor( protected http: HttpService ) { }
 
   public listarPorUsuario(usuarioId: string) {
-    return this.http.doGet<Reserva[]>(`${environment.reservas.endpoint}/reservas/${usuarioId}`, 
+
+    return this.http.doGet<Reserva[]>(`${environment.reservas.endpoint}/reservas/${usuarioId}`,
                                         this.http.optsName('consultar reservas'));
   }
 
   public crear(reserva: Reserva) {
-    return this.http.doPost<Reserva,number>(`${environment.reservas.endpoint}/reservas`, 
+
+    return this.http.doPost<Reserva, number>(`${environment.reservas.endpoint}/reservas`,
                                               reserva,
                                               this.http.optsName('crear reserva'));
   }

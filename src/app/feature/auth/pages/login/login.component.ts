@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
-import { UsuarioService } from 'src/app/feature/usuario/shared/service/usuario.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Usuario } from 'src/app/feature/usuario/shared/model/usuario';
 import { Router } from '@angular/router';
+import { UsuarioService } from '../../../usuario/shared/service/usuario.service';
 
 
 
@@ -31,16 +30,16 @@ export class LoginComponent implements OnInit {
 
   construirFormularioUsuario(): void {
     this.formGroup = this.formBuilder.group({
-      'telefonoCelular': ['', [Validators.required]]
+      telefonoCelular: ['', [Validators.required]]
     });
   }
 
   consultarUsuario() {
     this.usuarioService.listar()
-      .subscribe(      
+      .subscribe(
         resp => {
         this.usuarios = resp;
-        this.usuario = this.usuarios.find(usuario => usuario.telefonoCelular == this.formGroup.get('telefonoCelular').value);
+        this.usuario = this.usuarios.find(usuario => usuario.telefonoCelular === this.formGroup.get('telefonoCelular').value);
         if (this.usuario !== undefined) {
           this.mostrarSnackbar(`Bienvenido ${this.usuario.nombres}`);
           this.router.navigate(['./viviendas/listado']);
@@ -51,7 +50,7 @@ export class LoginComponent implements OnInit {
       },
       error => {
         this.mostrarSnackbar(error.error.mensaje);
-        console.log('http error',error.error.mensaje);
+        console.log('http error', error.error.mensaje);
       });
   }
 

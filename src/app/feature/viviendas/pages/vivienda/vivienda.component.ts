@@ -43,8 +43,8 @@ export class ViviendaComponent implements OnInit {
                   this.archivos = archivos;
                   this.vivienda.archivos = archivos;
 
-                })
-          })
+                });
+          });
       });
 
   }
