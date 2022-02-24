@@ -43,9 +43,9 @@ export class ListadoComponent implements OnInit {
   asignarArchivosAViviendas() {
     const copiaViviendas: Vivienda[] = this.viviendas;
     const copiaArchivos: Archivo[] = this.archivos;
-    for (let i = 0; i < copiaViviendas.length; i++) {
-      copiaViviendas[i].archivos = copiaArchivos
-        .filter(archivo => archivo.viviendaId === copiaViviendas[i].id);
+    for (const vivienda of copiaViviendas) {
+      vivienda.archivos = copiaArchivos
+        .filter(archivo => archivo.viviendaId === vivienda.id);
     }
     this.viviendas = copiaViviendas;
   }
