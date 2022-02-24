@@ -5,7 +5,7 @@ pipeline {
 
   stages {
      
-     stage('Install') {
+    stage('Install') {
       steps {
         sh 'npm install'
       }
@@ -15,6 +15,7 @@ pipeline {
       steps{
         echo "------------>Checkout<------------"
         checkout scm
+      }
     }
 
     stage('esLint') {
@@ -52,6 +53,5 @@ pipeline {
    }
 
   }
-
 
 }
