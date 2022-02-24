@@ -24,7 +24,7 @@ describe('ViviendaService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('deberia listar viviendas', ()=> {
+  it('deberia listar viviendas', () => {
     const dummyVivienda = new Vivienda();
     dummyVivienda.id = 1;
     dummyVivienda.admiteMascotas = 1;
@@ -64,7 +64,7 @@ describe('ViviendaService', () => {
 
   });
 
-  it('deberia consultar una vivienda', ()=> {
+  it('deberia consultar una vivienda', () => {
     const dummyVivienda = new Vivienda();
     dummyVivienda.id = 1;
     dummyVivienda.admiteMascotas = 1;
@@ -80,7 +80,7 @@ describe('ViviendaService', () => {
 
     service.consultarPorId(1).subscribe(vivienda => {
       expect(vivienda).toEqual(dummyVivienda);
-    })
+    });
 
     const req = httpMock.expectOne(`${apiEndpointViviendaConsulta}/1`);
     expect(req.request.method).toBe('GET');

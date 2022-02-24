@@ -4,7 +4,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { environment } from 'src/environments/environment';
 import { HttpService } from 'src/app/core/services/http.service';
 import { HttpResponse } from '@angular/common/http';
-import { Reserva } from "src/app/feature/reserva/shared/model/reserva";
+import { Reserva } from 'src/app/feature/reserva/shared/model/reserva';
 import { ReservaService } from './reserva.service';
 
 describe('ReservaService', () => {

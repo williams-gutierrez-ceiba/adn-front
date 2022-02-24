@@ -23,7 +23,7 @@ describe('UsuarioService', () => {
     service = TestBed.inject(UsuarioService);
   });
 
-  it('should be created', () => { 
+  it('should be created', () => {
     expect(service).toBeTruthy();
   });
 
@@ -40,7 +40,6 @@ describe('UsuarioService', () => {
     service.crear(dummyUsuario).subscribe(respuesta => {
       expect(respuesta).toEqual(true);
     });
-    
     const req = httpMock.expectOne(apiEndpointUsuarios);
     expect(req.request.method).toBe('POST');
     req.event(new HttpResponse<boolean>({body: true}));
