@@ -1,13 +1,13 @@
 <mat-card>
 
     <mat-card-header>
-        <mat-card-title> {{vivienda.ciudad}} </mat-card-title>
-        <mat-card-subtitle> {{vivienda.departamento}} </mat-card-subtitle>
+        <mat-card-title *ngIf="vivienda"> {{vivienda.ciudad}} </mat-card-title>
+        <mat-card-subtitle *ngIf="vivienda"> {{vivienda.departamento}} </mat-card-subtitle>
     </mat-card-header>
 
-    <img mat-card-image src="{{vivienda.archivos[0].ruta}}">
+    <img *ngIf="vivienda" mat-card-image src="{{vivienda.archivos[0].ruta}}">
 
-    <mat-card-content>
+    <mat-card-content *ngIf="vivienda">
         <h3> Costo diario </h3>
         <p>
             <strong> {{vivienda.costoDiario | currency}} COP </strong>
@@ -16,12 +16,11 @@
 
     <mat-divider></mat-divider>
 
-    <mat-card-actions>
+    <mat-card-actions *ngIf="vivienda">
         <button 
             mat-button color="info"
             [routerLink]="['/viviendas/', vivienda.id]">
             Ver más
         </button>
     </mat-card-actions>
-    <!-- <router-outlet></router-outlet> -->
 </mat-card>

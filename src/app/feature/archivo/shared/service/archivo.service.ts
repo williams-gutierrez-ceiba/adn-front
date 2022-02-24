@@ -16,7 +16,7 @@ export class ArchivoService {
   }
 
   listar(){
-    return this.http.doGet<Archivo[]>(`http://localhost:8082/archivos/archivos`,
+    return this.http.doGet<Archivo[]>(`${environment.archivos.endpoint}/archivos`,
                                         this.http.optsName('consultar archivos'));
   }
 
