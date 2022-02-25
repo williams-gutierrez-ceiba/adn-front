@@ -113,8 +113,8 @@ describe('CrearComponent', () => {
   it('deberia arrojar un error creando un usuario con un telefono celular existente', () => {
     spyOn(usuarioService, 'crear').and.returnValue(
       throwError({
-        "nombreExcepcion": "ExcepcionDuplicidad",
-        "mensaje": "El usuario ya existe en el sistema"
+        nombreExcepcion: 'ExcepcionDuplicidad',
+        mensaje: 'El usuario ya existe en el sistema'
       }));
     component.crear();
     expect(usuarioService.crear).toHaveBeenCalled();
