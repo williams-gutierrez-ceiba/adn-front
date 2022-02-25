@@ -32,7 +32,7 @@ pipeline {
 
     stage('Test coverage') {
       steps {
-        sh 'npm run test:coverage'
+        sh 'ng test --codeCoverage'
       }
     }
 
