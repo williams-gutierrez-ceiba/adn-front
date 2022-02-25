@@ -5,7 +5,7 @@
         <mat-card-subtitle *ngIf="vivienda"> {{vivienda.departamento}} </mat-card-subtitle>
     </mat-card-header>
 
-    <img *ngIf="vivienda" mat-card-image src="{{vivienda.archivos[0].ruta}}">
+    <img *ngIf="vivienda" alt="imagen principal de la vivienda" mat-card-image src="{{vivienda.archivos[0].ruta}}">
 
     <mat-card-content *ngIf="vivienda">
         <h3> Costo diario </h3>
