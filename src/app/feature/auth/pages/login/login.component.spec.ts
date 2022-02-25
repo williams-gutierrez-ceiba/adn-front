@@ -13,13 +13,33 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
 import { Usuario } from '../../../usuario/shared/model/usuario';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
   let usuarioService: UsuarioService;
+
+  const dummyUsuarioUno = new Usuario();
+  dummyUsuarioUno.id = 1;
+  dummyUsuarioUno.telefonoCelular = '300';
+  dummyUsuarioUno.nombres = 'Juan';
+  dummyUsuarioUno.apellidos = 'Perez';
+  dummyUsuarioUno.correoElectronico = 'test@test.com';
+  dummyUsuarioUno.tipoDocumento = 'CC';
+  dummyUsuarioUno.numeroDocumento = '123';
+
+  const dummyUsuarioDos = new Usuario();
+  dummyUsuarioDos.id = 2;
+  dummyUsuarioDos.telefonoCelular = '300';
+  dummyUsuarioDos.nombres = 'Juan';
+  dummyUsuarioDos.apellidos = 'Perez';
+  dummyUsuarioDos.correoElectronico = 'test@test.com';
+  dummyUsuarioDos.tipoDocumento = 'CC';
+  dummyUsuarioDos.numeroDocumento = '123';
+
+  const dummyUsuarios = [dummyUsuarioUno, dummyUsuarioDos];
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -42,31 +62,9 @@ describe('LoginComponent', () => {
   });
 
   beforeEach(() => {
-    const dummyUsuarioUno = new Usuario();
-    dummyUsuarioUno.id = 1;
-    dummyUsuarioUno.telefonoCelular = '300';
-    dummyUsuarioUno.nombres = 'Juan';
-    dummyUsuarioUno.apellidos = 'Perez';
-    dummyUsuarioUno.correoElectronico = 'test@test.com';
-    dummyUsuarioUno.tipoDocumento = 'CC';
-    dummyUsuarioUno.numeroDocumento = '123';
-
-    const dummyUsuarioDos = new Usuario();
-    dummyUsuarioDos.id = 2;
-    dummyUsuarioDos.telefonoCelular = '300';
-    dummyUsuarioDos.nombres = 'Juan';
-    dummyUsuarioDos.apellidos = 'Perez';
-    dummyUsuarioDos.correoElectronico = 'test@test.com';
-    dummyUsuarioDos.tipoDocumento = 'CC';
-    dummyUsuarioDos.numeroDocumento = '123';
-
-    const dummyUsuarios = [dummyUsuarioUno, dummyUsuarioDos];
     fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
     usuarioService = TestBed.inject(UsuarioService);
-    spyOn(usuarioService, 'listar').and.returnValue(
-      of(dummyUsuarios)
-    );
     fixture.detectChanges();
   });
 
@@ -76,6 +74,38 @@ describe('LoginComponent', () => {
 
   it('formulario es invalido cuando esta vacio', () => {
     expect(component.formGroup.valid).toBeFalsy();
+  });
+
+  it('deberia listar usuarios', () => {
+    spyOn(usuarioService, 'listar').and.returnValue(
+      of(dummyUsuarios)
+    );
+    component.consultarUsuario();
+    expect(usuarioService.listar).toHaveBeenCalled();
+  });
+
+  it('deberia verificar que el usuario existe', () => {
+    const telefonoCelular = component.formGroup.get('telefonoCelular');
+    telefonoCelular.setValue('300');
+    spyOn(usuarioService, 'listar').and.returnValue(
+      of(dummyUsuarios)
+    );
+    component.usuario = dummyUsuarioUno;
+    component.usuarios = dummyUsuarios;
+
+    component.consultarUsuario();
+
+    expect(usuarioService.listar).toHaveBeenCalled();
+  });
+
+  it('deberia arrojar un error cuando el backend falle', () => {
+    spyOn(usuarioService, 'listar').and.returnValue(
+      throwError({
+        "nombreExcepcion": "ExcepcionTecnica",
+        "mensaje": "error inesperado"
+      }));
+    component.consultarUsuario();
+    expect(usuarioService.listar).toHaveBeenCalled();
   });
 
 });

@@ -14,8 +14,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Usuario } from '../../shared/model/usuario';
-import { of } from 'rxjs';
-// import { By } from '@angular/platform-browser';
+import { of, throwError } from 'rxjs';
 
 describe('CrearComponent', () => {
   let component: CrearComponent;
@@ -78,12 +77,6 @@ describe('CrearComponent', () => {
 
   it('se debe crear un usuario correctamente', () => {
     const formulario = component.formGroup;
-    // const telefonoCelular = component.formGroup.controls['telefonoCelular'];
-    // const nombres = component.formGroup.controls['nombres'];
-    // const apellidos = component.formGroup.controls['apellidos'];
-    // const correoElectronico = component.formGroup.controls['correoElectronico'];
-    // const tipoDocumento = component.formGroup.controls['tipoDocumento'];
-    // const numeroDocumento = component.formGroup.controls['numeroDocumento'];
 
     const telefonoCelular = component.formGroup.get('telefonoCelular');
     const nombres = component.formGroup.get('nombres');
@@ -98,9 +91,6 @@ describe('CrearComponent', () => {
     correoElectronico.setValue('test@test.com');
     tipoDocumento.setValue('CC');
     numeroDocumento.setValue('40402228');
-
-    // const elementoBoton = fixture.debugElement.query(By.css('button.button'));
-    // elementoBoton.nativeElement.click();
 
     const usuario = new Usuario();
 
@@ -118,6 +108,16 @@ describe('CrearComponent', () => {
     component.crear();
     expect(usuarioService.crear).toHaveBeenCalled();
 
+  });
+
+  it('deberia arrojar un error creando un usuario con un telefono celular existente', () => {
+    spyOn(usuarioService, 'crear').and.returnValue(
+      throwError({
+        "nombreExcepcion": "ExcepcionDuplicidad",
+        "mensaje": "El usuario ya existe en el sistema"
+      }));
+    component.crear();
+    expect(usuarioService.crear).toHaveBeenCalled();
   });
 
 });

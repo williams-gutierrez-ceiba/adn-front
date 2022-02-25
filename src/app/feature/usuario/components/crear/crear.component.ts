@@ -54,7 +54,6 @@ export class CrearComponent implements OnInit {
       },
       error => {
         this.mostrarSnackbar(error.error.mensaje);
-        console.log('http error', error.error.mensaje);
       }
     );
   }

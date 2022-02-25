@@ -50,7 +50,6 @@ export class LoginComponent implements OnInit {
       },
       error => {
         this.mostrarSnackbar(error.error.mensaje);
-        console.log('http error', error.error.mensaje);
       });
   }
 
