@@ -31,12 +31,6 @@ pipeline {
       }
     }
 
-    stage('Test coverage') {
-      steps {
-        sh 'ng test --codeCoverage'
-      }
-    }
-
    stage('Build') {
       steps {
         sh 'npm run build'
