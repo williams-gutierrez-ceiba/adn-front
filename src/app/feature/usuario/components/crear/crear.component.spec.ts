@@ -13,7 +13,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Usuario } from '../../shared/model/usuario';
 import { of } from 'rxjs';
+// import { By } from '@angular/platform-browser';
 
 describe('CrearComponent', () => {
   let component: CrearComponent;
@@ -44,9 +46,6 @@ describe('CrearComponent', () => {
     fixture = TestBed.createComponent(CrearComponent);
     component = fixture.componentInstance;
     usuarioService = TestBed.inject(UsuarioService);
-    spyOn(usuarioService, 'crear').and.returnValue(
-      of(true)
-    );
     fixture.detectChanges();
   });
 
@@ -56,6 +55,69 @@ describe('CrearComponent', () => {
 
   it('formulario es invalido cuando esta vacio', () => {
     expect(component.formGroup.valid).toBeFalsy();
+  });
+
+  it('formulario es valido cuando no esta vacio', () => {
+    const formulario = component.formGroup;
+    const telefonoCelular = component.formGroup.get('telefonoCelular');
+    const nombres = component.formGroup.get('nombres');
+    const apellidos = component.formGroup.get('apellidos');
+    const correoElectronico = component.formGroup.get('correoElectronico');
+    const tipoDocumento = component.formGroup.get('tipoDocumento');
+    const numeroDocumento = component.formGroup.get('numeroDocumento');
+
+    telefonoCelular.setValue('3126547896');
+    nombres.setValue('Juan');
+    apellidos.setValue('Perez');
+    correoElectronico.setValue('test@test.com');
+    tipoDocumento.setValue('CC');
+    numeroDocumento.setValue('40402228');
+
+    expect(formulario.valid).toBeTrue();
+  });
+
+  it('se debe crear un usuario correctamente', () => {
+    const formulario = component.formGroup;
+    // const telefonoCelular = component.formGroup.controls['telefonoCelular'];
+    // const nombres = component.formGroup.controls['nombres'];
+    // const apellidos = component.formGroup.controls['apellidos'];
+    // const correoElectronico = component.formGroup.controls['correoElectronico'];
+    // const tipoDocumento = component.formGroup.controls['tipoDocumento'];
+    // const numeroDocumento = component.formGroup.controls['numeroDocumento'];
+
+    const telefonoCelular = component.formGroup.get('telefonoCelular');
+    const nombres = component.formGroup.get('nombres');
+    const apellidos = component.formGroup.get('apellidos');
+    const correoElectronico = component.formGroup.get('correoElectronico');
+    const tipoDocumento = component.formGroup.get('tipoDocumento');
+    const numeroDocumento = component.formGroup.get('numeroDocumento');
+
+    telefonoCelular.setValue('3126547896');
+    nombres.setValue('Juan');
+    apellidos.setValue('Perez');
+    correoElectronico.setValue('test@test.com');
+    tipoDocumento.setValue('CC');
+    numeroDocumento.setValue('40402228');
+
+    // const elementoBoton = fixture.debugElement.query(By.css('button.button'));
+    // elementoBoton.nativeElement.click();
+
+    const usuario = new Usuario();
+
+    usuario.telefonoCelular = formulario.get('telefonoCelular').value;
+    usuario.nombres = formulario.get('nombres').value;
+    usuario.apellidos = formulario.get('apellidos').value;
+    usuario.correoElectronico = formulario.get('correoElectronico').value;
+    usuario.tipoDocumento = formulario.get('tipoDocumento').value;
+    usuario.numeroDocumento = formulario.get('numeroDocumento').value;
+
+    spyOn(usuarioService, 'crear').and.callFake(() => {
+      return of(true);
+    });
+
+    component.crear();
+    expect(usuarioService.crear).toHaveBeenCalled();
+
   });
 
 });
