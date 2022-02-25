@@ -1,3 +1,4 @@
+@Library('ceiba-jenkins-library') _
 pipeline {
   agent {
     label 'Slave_Induccion'
@@ -43,13 +44,12 @@ pipeline {
     }  
 
     stage('Static Code Analysis') {
-      steps{
+			steps{
         echo '------------>Análisis de código estático<------------'
-        withSonarQubeEnv('Sonar') {
-          sh "${tool name: 'SonarScanner', type:'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner"
-        }
-
-      }
+				sonarqubeMasQualityGatesP(sonarKey:'co.com.ceiba.adn:williams.ReservaViviendasFront.gutierrez',
+        sonarName:'''"ADN-ReservaViviendasFront(williams.gutierrez)"''',
+        sonarPathProperties:'./sonar-project.properties')
+			}
    }
 
   }
