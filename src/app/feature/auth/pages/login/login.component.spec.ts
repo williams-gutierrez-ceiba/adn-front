@@ -16,6 +16,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { of, throwError } from 'rxjs';
 import { Usuario } from '../../../usuario/shared/model/usuario';
 import { Vivienda } from '../../../viviendas/shared/model/vivienda';
+import { ListadoComponent } from '../../../viviendas/pages/listado/listado.component';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -79,6 +80,9 @@ describe('LoginComponent', () => {
     fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
     usuarioService = TestBed.inject(UsuarioService);
+    RouterTestingModule.withRoutes([
+      { path: '/viviendas/listado', component: ListadoComponent }
+    ]);
     fixture.detectChanges();
   });
 

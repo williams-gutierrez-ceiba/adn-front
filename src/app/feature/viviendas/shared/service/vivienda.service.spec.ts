@@ -56,12 +56,11 @@ describe('ViviendaService', () => {
     service.listar().subscribe(viviendas => {
       expect(viviendas.length).toBe(2);
       expect(viviendas).toEqual(dummyViviendas);
-
-      const req = httpMock.expectOne(apiEndpointViviendaConsulta);
-      expect(req.request.method).toBe('GET');
-      req.flush(dummyViviendas);
     });
 
+    const req = httpMock.expectOne(apiEndpointViviendaConsulta);
+    expect(req.request.method).toBe('GET');
+    req.flush(dummyViviendas);
   });
 
   it('deberia consultar una vivienda', () => {
