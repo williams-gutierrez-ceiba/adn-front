@@ -4,9 +4,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { ListadoComponent } from "./listado.component";
-import { ArchivoService } from "../../../archivo/shared/service/archivo.service";
-import { ViviendaService } from "../../../viviendas/shared/service/vivienda.service";
+import { ListadoComponent } from './listado.component';
+import { ArchivoService } from '../../../archivo/shared/service/archivo.service';
+import { ViviendaService } from '../../../viviendas/shared/service/vivienda.service';
 
 import { HttpService } from 'src/app/core/services/http.service';
 import { Vivienda } from '../../shared/model/vivienda';
@@ -15,8 +15,8 @@ import { Archivo } from '../../../archivo/shared/model/archivo';
 
 
 describe('ListadoComponent', () => {
-    let component : ListadoComponent;
-    let fixture : ComponentFixture<ListadoComponent>;
+    let component: ListadoComponent;
+    let fixture: ComponentFixture<ListadoComponent>;
     let archivoService: ArchivoService;
     let viviendaService: ViviendaService;
 
