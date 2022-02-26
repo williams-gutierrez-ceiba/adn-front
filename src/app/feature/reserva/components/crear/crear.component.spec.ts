@@ -172,14 +172,4 @@ describe('CrearComponent', () => {
     expect(reservaService.crear).toHaveBeenCalled();
   });
 
-  // it('deberia arrojar un error cuando el backend falle creando una reserva', () => {
-  //   spyOn(reservaService, 'crear').and.returnValue(
-  //     throwError({
-  //       nombreExcepcion: 'ExcepcionTecnica',
-  //       mensaje: 'error inesperado'
-  //     }));
-  //   component.crearReserva();
-  //   expect(reservaService.crear).toHaveBeenCalled();
-  // });
-
 });
