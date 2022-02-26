@@ -4,6 +4,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+
 import { ListadoComponent } from './listado.component';
 import { ArchivoService } from '../../../archivo/shared/service/archivo.service';
 import { ViviendaService } from '../../../viviendas/shared/service/vivienda.service';
@@ -12,6 +16,9 @@ import { HttpService } from 'src/app/core/services/http.service';
 import { Vivienda } from '../../shared/model/vivienda';
 import { of } from 'rxjs';
 import { Archivo } from '../../../archivo/shared/model/archivo';
+
+import {MatDividerModule} from '@angular/material/divider';
+import { MaterialModule } from '../../../material/material.module';
 
 
 describe('ListadoComponent', () => {
@@ -76,13 +83,18 @@ describe('ListadoComponent', () => {
                 CommonModule,
                 HttpClientModule,
                 RouterTestingModule,
-                BrowserAnimationsModule
+                BrowserAnimationsModule,
+                MatFormFieldModule,
+                MatInputModule,
+                MatSelectModule,
+                MatDividerModule,
+                MaterialModule
             ],
             providers: [
                 HttpService,
                 ArchivoService,
                 ViviendaService
-            ],
+            ]
         })
         .compileComponents();
     });
