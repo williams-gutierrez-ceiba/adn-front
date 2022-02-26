@@ -15,6 +15,7 @@ import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { of, throwError } from 'rxjs';
 import { Usuario } from '../../../usuario/shared/model/usuario';
+import { Vivienda } from '../../../viviendas/shared/model/vivienda';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -40,6 +41,19 @@ describe('LoginComponent', () => {
   dummyUsuarioDos.numeroDocumento = '123';
 
   const dummyUsuarios = [dummyUsuarioUno, dummyUsuarioDos];
+
+  const dummyVivienda = new Vivienda();
+  dummyVivienda.id = 1;
+  dummyVivienda.admiteMascotas = 1;
+  dummyVivienda.aireAcondicionado = 1;
+  dummyVivienda.calefaccion = 1;
+  dummyVivienda.ciudad = 'ciudad';
+  dummyVivienda.departamento = 'depto';
+  dummyVivienda.costoDiario = 100000;
+  dummyVivienda.tipoVivienda = 1;
+  dummyVivienda.numeroBanios = 2;
+  dummyVivienda.numeroHabitaciones = 2;
+  dummyVivienda.numeroPersonas = 2;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
