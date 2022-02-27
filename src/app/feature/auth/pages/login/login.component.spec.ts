@@ -65,7 +65,7 @@ describe('LoginComponent', () => {
       ],
       imports: [
         RouterTestingModule.withRoutes([
-          { path: './viviendas/listado', component: ListadoComponent }
+          { path: 'http://localhost:4200/viviendas/listado', component: ListadoComponent }
         ]),
         CommonModule,
         HttpClientModule,
