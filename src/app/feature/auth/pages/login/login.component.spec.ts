@@ -67,7 +67,9 @@ describe('LoginComponent', () => {
       ],
       imports: [
         RouterTestingModule.withRoutes([
-          { path: './viviendas/listado', component: ListadoComponent }
+          { path: './viviendas/listado', component: ListadoComponent, pathMatch: 'full' }
+          // { path: 'viviendas', loadChildren: () => import('../../../viviendas/viviendas.module').then(mod => mod.ViviendasModule) }
+          // {path: 'listado', component: ListadoComponent}
         ]),
         CommonModule,
         HttpClientModule,
@@ -83,6 +85,11 @@ describe('LoginComponent', () => {
       providers: [UsuarioService, HttpService],
     })
     .compileComponents();
+
+    // router = TestBed.inject(Router);
+
+    // spyOn(router, 'navigate').and.returnValue(Promise.resolve(true));
+    // router.initialNavigation();
   });
 
   beforeEach(() => {
@@ -90,6 +97,8 @@ describe('LoginComponent', () => {
     component = fixture.componentInstance;
     usuarioService = TestBed.inject(UsuarioService);
     router = TestBed.inject(Router);
+
+    // router.initialNavigation();
 
     spyOn(router, 'navigate').and.returnValue(Promise.resolve(true));
 
@@ -124,6 +133,7 @@ describe('LoginComponent', () => {
     component.consultarUsuario();
 
     expect(usuarioService.listar).toHaveBeenCalled();
+    expect(router.navigate).toHaveBeenCalledWith(['./viviendas/listado']);
   });
 
   it('deberia arrojar un error cuando el backend falle', () => {
