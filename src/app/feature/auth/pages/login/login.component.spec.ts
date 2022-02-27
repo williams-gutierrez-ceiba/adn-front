@@ -59,7 +59,7 @@ describe('LoginComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ 
+      declarations: [
         LoginComponent,
         ListadoComponent
       ],
