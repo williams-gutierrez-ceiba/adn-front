@@ -65,7 +65,7 @@ describe('LoginComponent', () => {
       ],
       imports: [
         RouterTestingModule.withRoutes([
-          { path: 'viviendas/listado', component: ListadoComponent }
+          { path: './viviendas/listado', component: ListadoComponent }
         ]),
         CommonModule,
         HttpClientModule,
