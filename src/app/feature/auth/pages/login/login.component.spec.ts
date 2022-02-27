@@ -17,12 +17,14 @@ import { of, throwError } from 'rxjs';
 import { Usuario } from '../../../usuario/shared/model/usuario';
 import { Vivienda } from '../../../viviendas/shared/model/vivienda';
 import { ListadoComponent } from '../../../viviendas/pages/listado/listado.component';
+import { Router } from '@angular/router';
 
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
   let usuarioService: UsuarioService;
+  let router: Router;
 
   const dummyUsuarioUno = new Usuario();
   dummyUsuarioUno.id = 1;
@@ -65,7 +67,7 @@ describe('LoginComponent', () => {
       ],
       imports: [
         RouterTestingModule.withRoutes([
-          { path: 'http://localhost:4200/viviendas/listado', component: ListadoComponent }
+          { path: './viviendas/listado', component: ListadoComponent }
         ]),
         CommonModule,
         HttpClientModule,
@@ -87,9 +89,10 @@ describe('LoginComponent', () => {
     fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
     usuarioService = TestBed.inject(UsuarioService);
-    // RouterTestingModule.withRoutes([
-    //   { path: '/viviendas/listado', component: ListadoComponent }
-    // ]);
+    router = TestBed.inject(Router);
+
+    spyOn(router, 'navigate').and.returnValue(Promise.resolve(true));
+
     fixture.detectChanges();
   });
 
