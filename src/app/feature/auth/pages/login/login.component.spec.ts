@@ -18,6 +18,7 @@ import { Usuario } from '../../../usuario/shared/model/usuario';
 import { Vivienda } from '../../../viviendas/shared/model/vivienda';
 import { ListadoComponent } from '../../../viviendas/pages/listado/listado.component';
 
+
 describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
@@ -58,8 +59,14 @@ describe('LoginComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LoginComponent ],
+      declarations: [ 
+        LoginComponent,
+        ListadoComponent
+      ],
       imports: [
+        RouterTestingModule.withRoutes([
+          { path: 'viviendas/listado', component: ListadoComponent }
+        ]),
         CommonModule,
         HttpClientModule,
         RouterTestingModule,
@@ -80,9 +87,9 @@ describe('LoginComponent', () => {
     fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
     usuarioService = TestBed.inject(UsuarioService);
-    RouterTestingModule.withRoutes([
-      { path: '/viviendas/listado', component: ListadoComponent }
-    ]);
+    // RouterTestingModule.withRoutes([
+    //   { path: '/viviendas/listado', component: ListadoComponent }
+    // ]);
     fixture.detectChanges();
   });
 
