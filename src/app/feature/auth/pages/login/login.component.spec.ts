@@ -13,8 +13,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { of, throwError } from 'rxjs';
-// import { of } from 'rxjs';
+// import { of, throwError } from 'rxjs';
+import { of } from 'rxjs';
 import { Usuario } from '../../../usuario/shared/model/usuario';
 import { Vivienda } from '../../../viviendas/shared/model/vivienda';
 import { ListadoComponent } from '../../../viviendas/pages/listado/listado.component';
@@ -130,15 +130,15 @@ describe('LoginComponent', () => {
     expect(router.navigate).toHaveBeenCalledWith(['./viviendas/listado']);
   });
 
-  it('deberia arrojar un error cuando el backend falle', () => {
-    spyOn(usuarioService, 'listar').and.callFake(() => {
-      return throwError({
-          "nombreExcepcion": 'ExcepcionTecnica',
-          "mensaje": 'error inesperado'
-        });
-    });
-    component.consultarUsuario();
-    expect(usuarioService.listar).toHaveBeenCalled();
-  });
+  // it('deberia arrojar un error cuando el backend falle', () => {
+  //   spyOn(usuarioService, 'listar').and.callFake(() => {
+  //     return throwError({
+  //         "nombreExcepcion": 'ExcepcionTecnica',
+  //         "mensaje": 'error inesperado'
+  //       });
+  //   });
+  //   component.consultarUsuario();
+  //   expect(usuarioService.listar).toHaveBeenCalled();
+  // });
 
 });

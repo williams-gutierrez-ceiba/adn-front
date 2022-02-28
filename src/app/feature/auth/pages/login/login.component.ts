@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
         console.log(this.usuarios);
       },
       error => {
-        this.mostrarSnackbar(error);
+        this.mostrarSnackbar(error.error.mensaje);
       });
   }
 
