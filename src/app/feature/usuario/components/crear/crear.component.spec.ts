@@ -5,7 +5,6 @@ import { UsuarioService } from '../../shared/service/usuario.service';
 import { HttpService } from 'src/app/core/services/http.service';
 
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -14,8 +13,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Usuario } from '../../shared/model/usuario';
-// import { of, throwError } from 'rxjs';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('CrearComponent', () => {
   let component: CrearComponent;
@@ -27,7 +26,7 @@ describe('CrearComponent', () => {
       declarations: [ CrearComponent ],
       imports: [
         CommonModule,
-        HttpClientModule,
+        HttpClientTestingModule,
         RouterTestingModule,
         ReactiveFormsModule,
         MatSnackBarModule,
@@ -111,15 +110,15 @@ describe('CrearComponent', () => {
 
   });
 
-  // it('deberia arrojar un error creando un usuario con un telefono celular existente', () => {
-  //   spyOn(usuarioService, 'crear').and.callFake(() => {
-  //     return throwError({
-  //         "nombreExcepcion": 'ExcepcionTecnica',
-  //         "mensaje": 'error inesperado'
-  //       });
-  //   });
-  //   component.crear();
-  //   expect(usuarioService.crear).toHaveBeenCalled();
-  // });
+  it('deberia arrojar un error creando un usuario con un telefono celular existente', () => {
+    const mensajeError = 'usuario ya existe en el sistema';
+    const spyUsuario = spyOn(usuarioService, 'crear').and.callFake(() => {
+                        return throwError({status: 404, error: {mensaje: mensajeError}});
+                      });
+    const spySnackBar = spyOn(component, 'mostrarSnackbar');
+    component.crear();
+    expect(spyUsuario).toHaveBeenCalled();
+    expect(spySnackBar).toHaveBeenCalledOnceWith(mensajeError);
+  });
 
 });
