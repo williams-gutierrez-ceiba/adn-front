@@ -93,12 +93,12 @@ describe('ListarComponent', () => {
   it('deberia verificar que el usuario existe', () => {
     const telefonoCelular = component.formGroup.get('telefonoCelular');
     telefonoCelular.setValue('300');
-    spyOn(usuarioService, 'listar').and.returnValue(
-      of(dummyUsuarios)
-    );
-    spyOn(reservaService, 'listarPorUsuario').and.returnValue(
-      of(dummyReservas)
-    );
+    spyOn(usuarioService, 'listar').and.callFake(() => {
+      return of(dummyUsuarios);
+    });
+    spyOn(reservaService, 'listarPorUsuario').and.callFake(() => {
+      return of(dummyReservas);
+    });
 
     component.usuario = dummyUsuarioUno;
     component.usuarios = dummyUsuarios;
@@ -112,9 +112,9 @@ describe('ListarComponent', () => {
   it('deberia mostrar mesaje cuando usuario no existe', () => {
     const telefonoCelular = component.formGroup.get('telefonoCelular');
     telefonoCelular.setValue('300');
-    spyOn(usuarioService, 'listar').and.returnValue(
-      of(dummyUsuarios)
-    );
+    spyOn(usuarioService, 'listar').and.callFake(() => {
+      return of(dummyUsuarios);
+    });
 
     component.usuarios = dummyUsuarios;
     component.usuario = undefined;

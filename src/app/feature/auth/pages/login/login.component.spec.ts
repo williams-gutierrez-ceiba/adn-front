@@ -68,8 +68,6 @@ describe('LoginComponent', () => {
       imports: [
         RouterTestingModule.withRoutes([
           { path: './viviendas/listado', component: ListadoComponent, pathMatch: 'full' }
-          // { path: 'viviendas', loadChildren: () => import('../../../viviendas/viviendas.module').then(mod => mod.ViviendasModule) }
-          // {path: 'listado', component: ListadoComponent}
         ]),
         CommonModule,
         HttpClientModule,
@@ -85,11 +83,6 @@ describe('LoginComponent', () => {
       providers: [UsuarioService, HttpService],
     })
     .compileComponents();
-
-    // router = TestBed.inject(Router);
-
-    // spyOn(router, 'navigate').and.returnValue(Promise.resolve(true));
-    // router.initialNavigation();
   });
 
   beforeEach(() => {
@@ -114,9 +107,9 @@ describe('LoginComponent', () => {
   });
 
   it('deberia listar usuarios', () => {
-    spyOn(usuarioService, 'listar').and.returnValue(
-      of(dummyUsuarios)
-    );
+    spyOn(usuarioService, 'listar').and.callFake(() => {
+      return of(dummyUsuarios);
+    });
     component.consultarUsuario();
     expect(usuarioService.listar).toHaveBeenCalled();
   });
@@ -124,9 +117,9 @@ describe('LoginComponent', () => {
   it('deberia verificar que el usuario existe', () => {
     const telefonoCelular = component.formGroup.get('telefonoCelular');
     telefonoCelular.setValue('300');
-    spyOn(usuarioService, 'listar').and.returnValue(
-      of(dummyUsuarios)
-    );
+    spyOn(usuarioService, 'listar').and.callFake(() => {
+      return of(dummyUsuarios);
+    });
     component.usuario = dummyUsuarioUno;
     component.usuarios = dummyUsuarios;
 
@@ -137,11 +130,12 @@ describe('LoginComponent', () => {
   });
 
   it('deberia arrojar un error cuando el backend falle', () => {
-    spyOn(usuarioService, 'listar').and.returnValue(
-      throwError({
-        "nombreExcepcion": 'ExcepcionTecnica',
-        "mensaje": 'error inesperado'
-      }));
+    spyOn(usuarioService, 'listar').and.callFake(() => {
+      return throwError({
+          "nombreExcepcion": 'ExcepcionTecnica',
+          "mensaje": 'error inesperado'
+        })
+    });
     component.consultarUsuario();
     expect(usuarioService.listar).toHaveBeenCalled();
   });

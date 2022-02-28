@@ -103,9 +103,9 @@ describe('CrearComponent', () => {
     reservaService = TestBed.inject(ReservaService);
     router = TestBed.inject(Router);
 
-    spyOn(viviendaService, 'consultarPorId').and.returnValue(
-      of(dummyVivienda)
-    );
+    spyOn(viviendaService, 'consultarPorId').and.callFake(() => {
+      return of(dummyVivienda);
+    });
 
     router.initialNavigation();
 
@@ -123,9 +123,9 @@ describe('CrearComponent', () => {
   });
 
   it('deberia listar usuarios', () => {
-    spyOn(usuarioService, 'listar').and.returnValue(
-      of(dummyUsuarios)
-    );
+    spyOn(usuarioService, 'listar').and.callFake(() => {
+      return of(dummyUsuarios);
+    });
     component.consultarUsuario();
     expect(usuarioService.listar).toHaveBeenCalled();
   });
@@ -133,9 +133,9 @@ describe('CrearComponent', () => {
   it('deberia verificar que el usuario existe', () => {
     const telefonoCelular = component.formGroup.get('telefonoCelular');
     telefonoCelular.setValue('300');
-    spyOn(usuarioService, 'listar').and.returnValue(
-      of(dummyUsuarios)
-    );
+    spyOn(usuarioService, 'listar').and.callFake(() => {
+      return of(dummyUsuarios);
+    });
     component.usuario = dummyUsuarioUno;
     component.usuarios = dummyUsuarios;
 
@@ -145,11 +145,12 @@ describe('CrearComponent', () => {
   });
 
   it('deberia arrojar un error cuando el backend falle', () => {
-    spyOn(usuarioService, 'listar').and.returnValue(
-      throwError({
-        "nombreExcepcion": 'ExcepcionTecnica',
-        "mensaje": 'error inesperado',
-      }));
+    spyOn(usuarioService, 'listar').and.callFake(() => {
+      return throwError({
+          "nombreExcepcion": 'ExcepcionTecnica',
+          "mensaje": 'error inesperado'
+        })
+    });
     component.consultarUsuario();
     expect(usuarioService.listar).toHaveBeenCalled();
   });
