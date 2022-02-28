@@ -12,4 +12,12 @@ describe('SecurityGuard', () => {
   it('should ...', inject([SecurityGuard], (guard: SecurityGuard) => {
     expect(guard).toBeTruthy();
   }));
+
+  it('should return true', () => {
+    const value = true;
+    let guard: SecurityGuard = TestBed.inject(SecurityGuard);
+    guard.canActivate();
+    expect(guard.canActivate()).toBe(value);
+  });
+
 });
