@@ -14,7 +14,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Usuario } from '../../shared/model/usuario';
-import { of, throwError } from 'rxjs';
+// import { of, throwError } from 'rxjs';
+import { of } from 'rxjs';
 
 describe('CrearComponent', () => {
   let component: CrearComponent;
@@ -110,15 +111,15 @@ describe('CrearComponent', () => {
 
   });
 
-  it('deberia arrojar un error creando un usuario con un telefono celular existente', () => {
-    spyOn(usuarioService, 'crear').and.callFake(() => {
-      return throwError({
-          "nombreExcepcion": 'ExcepcionTecnica',
-          "mensaje": 'error inesperado'
-        });
-    });
-    component.crear();
-    expect(usuarioService.crear).toHaveBeenCalled();
-  });
+  // it('deberia arrojar un error creando un usuario con un telefono celular existente', () => {
+  //   spyOn(usuarioService, 'crear').and.callFake(() => {
+  //     return throwError({
+  //         "nombreExcepcion": 'ExcepcionTecnica',
+  //         "mensaje": 'error inesperado'
+  //       });
+  //   });
+  //   component.crear();
+  //   expect(usuarioService.crear).toHaveBeenCalled();
+  // });
 
 });
