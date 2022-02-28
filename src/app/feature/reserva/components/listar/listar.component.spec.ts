@@ -11,12 +11,12 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatInputModule } from '@angular/material/input';
-import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Usuario } from '../../../usuario/shared/model/usuario';
 import { of } from 'rxjs';
 import { Reserva } from '../../shared/model/reserva';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('ListarComponent', () => {
   let component: ListarComponent;
@@ -60,7 +60,7 @@ describe('ListarComponent', () => {
         ReactiveFormsModule,
         FormsModule,
         CommonModule,
-        HttpClientModule,
+        HttpClientTestingModule,
         RouterTestingModule,
         ReactiveFormsModule,
         MatSnackBarModule,
