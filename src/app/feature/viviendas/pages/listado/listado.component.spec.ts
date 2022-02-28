@@ -136,4 +136,18 @@ describe('ListadoComponent', () => {
         expect(component.viviendas[1].archivos.length).toBeGreaterThan(0);
     });
 
+    it('debería invocar correctamente al forkjoin', () => {
+        const spyVivienda = spyOn(viviendaService, 'listar').and.callFake(() => {
+            return of(dummyViviendas);
+        });
+        const spyArchivo = spyOn(archivoService, 'listar').and.callFake(() => {
+            return of(dummyArchivos);
+        });
+
+        component.ngOnInit();
+
+        expect(spyArchivo).toHaveBeenCalled();
+        expect(spyVivienda).toHaveBeenCalled();
+    });
+
 });
