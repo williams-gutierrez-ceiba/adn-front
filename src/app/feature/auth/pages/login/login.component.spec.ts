@@ -98,7 +98,7 @@ describe('LoginComponent', () => {
     usuarioService = TestBed.inject(UsuarioService);
     router = TestBed.inject(Router);
 
-    // router.initialNavigation();
+    router.initialNavigation();
 
     spyOn(router, 'navigate').and.returnValue(Promise.resolve(true));
 

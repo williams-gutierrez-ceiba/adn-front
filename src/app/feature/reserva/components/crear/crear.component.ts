@@ -36,10 +36,8 @@ export class CrearComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params
     .subscribe( ({ viviendaId }) => {
-      console.log(viviendaId);
       this.viviendaService.consultarPorId(viviendaId)
         .subscribe( vivienda => {
-            console.log(vivienda);
             this.vivienda = vivienda;
         });
     });
@@ -72,7 +70,6 @@ export class CrearComponent implements OnInit {
         } else {
           this.mostrarSnackbar('El usuario no existe');
         }
-        console.log(this.usuarios);
       },
       error => {
         this.mostrarSnackbar(error.error.mensaje);
@@ -80,10 +77,10 @@ export class CrearComponent implements OnInit {
   }
 
   crearReserva() {
-    const fechaInicioStr = this.formGroup.get('fechaInicio').value.toString().split('T');
-    const fechaFinStr = this.formGroup.get('fechaFin').value.toString().split('T');
-    this.reserva.fechaInicio = fechaInicioStr[0];
-    this.reserva.fechaFin = fechaFinStr[0];
+    const fechaInicioStr = this.formGroup.get('fechaInicio').value.toISOString();
+    const fechaFinStr = this.formGroup.get('fechaFin').value.toISOString();
+    this.reserva.fechaInicio = fechaInicioStr.split('T')[0];
+    this.reserva.fechaFin = fechaFinStr.split('T')[0];
     this.reserva.usuarioId = this.usuario.telefonoCelular;
     this.reserva.viviendaId = this.vivienda.id;
     this.reserva.valorParcial = this.vivienda.costoDiario;

@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CrearComponent } from './crear.component';
+import { ListadoComponent } from '../../../viviendas/pages/listado/listado.component';
 import { HttpService } from 'src/app/core/services/http.service';
 
 import { UsuarioService } from '../../../usuario/shared/service/usuario.service';
@@ -21,12 +22,15 @@ import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Reserva } from '../../shared/model/reserva';
 
+import { Router } from '@angular/router';
+
 describe('CrearComponent', () => {
   let component: CrearComponent;
   let fixture: ComponentFixture<CrearComponent>;
   let usuarioService: UsuarioService;
   let viviendaService: ViviendaService;
   let reservaService: ReservaService;
+  let router: Router;
 
   const dummyUsuarioUno = new Usuario();
   dummyUsuarioUno.id = 1;
@@ -65,6 +69,9 @@ describe('CrearComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ CrearComponent ],
       imports: [
+        RouterTestingModule.withRoutes([
+          { path: './viviendas/listado', component: ListadoComponent, pathMatch: 'full' }
+        ]),
         ReactiveFormsModule,
         FormsModule,
         CommonModule,
@@ -94,10 +101,15 @@ describe('CrearComponent', () => {
     usuarioService = TestBed.inject(UsuarioService);
     viviendaService = TestBed.inject(ViviendaService);
     reservaService = TestBed.inject(ReservaService);
+    router = TestBed.inject(Router);
 
     spyOn(viviendaService, 'consultarPorId').and.returnValue(
       of(dummyVivienda)
     );
+
+    router.initialNavigation();
+
+    spyOn(router, 'navigate').and.returnValue(Promise.resolve(true));
 
     fixture.detectChanges();
   });
@@ -135,8 +147,8 @@ describe('CrearComponent', () => {
   it('deberia arrojar un error cuando el backend falle', () => {
     spyOn(usuarioService, 'listar').and.returnValue(
       throwError({
-        nombreExcepcion: 'ExcepcionTecnica',
-        mensaje: 'error inesperado'
+        "nombreExcepcion": 'ExcepcionTecnica',
+        "mensaje": 'error inesperado',
       }));
     component.consultarUsuario();
     expect(usuarioService.listar).toHaveBeenCalled();
@@ -146,15 +158,15 @@ describe('CrearComponent', () => {
     component.construirFormularioReserva();
     const fechaInicio = component.formGroup.get('fechaInicio');
     const fechaFin = component.formGroup.get('fechaFin');
-    fechaInicio.setValue('2022-12-01T05:00:00:00');
-    fechaFin.setValue('2022-12-01T05:00:00:00');
+    fechaInicio.setValue(new Date());
+    fechaFin.setValue(new Date());
 
-    const fechaInicioStr = component.formGroup.get('fechaInicio').value.toString().split('T');
-    const fechaFinStr = component.formGroup.get('fechaFin').value.toString().split('T');
+    const fechaInicioStr = component.formGroup.get('fechaInicio').value.toISOString();
+    const fechaFinStr = component.formGroup.get('fechaFin').value.toISOString();
 
     const reserva: Reserva = new Reserva();
-    reserva.fechaInicio = fechaInicioStr[0];
-    reserva.fechaFin = fechaFinStr[0];
+    reserva.fechaInicio = fechaInicioStr.split('T')[0];
+    reserva.fechaFin = fechaFinStr.split('T')[0];
     reserva.usuarioId = dummyUsuarioUno.telefonoCelular;
     reserva.viviendaId = dummyVivienda.id;
     reserva.valorParcial = dummyVivienda.costoDiario;
