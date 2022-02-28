@@ -134,7 +134,7 @@ describe('LoginComponent', () => {
       return throwError({
           "nombreExcepcion": 'ExcepcionTecnica',
           "mensaje": 'error inesperado'
-        })
+        });
     });
     component.consultarUsuario();
     expect(usuarioService.listar).toHaveBeenCalled();

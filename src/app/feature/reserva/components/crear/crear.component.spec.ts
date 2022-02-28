@@ -149,7 +149,7 @@ describe('CrearComponent', () => {
       return throwError({
           "nombreExcepcion": 'ExcepcionTecnica',
           "mensaje": 'error inesperado'
-        })
+        });
     });
     component.consultarUsuario();
     expect(usuarioService.listar).toHaveBeenCalled();
