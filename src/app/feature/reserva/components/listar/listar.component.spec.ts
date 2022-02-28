@@ -35,7 +35,7 @@ describe('ListarComponent', () => {
 
   const dummyUsuarioDos = new Usuario();
   dummyUsuarioDos.id = 2;
-  dummyUsuarioDos.telefonoCelular = '300';
+  dummyUsuarioDos.telefonoCelular = '500';
   dummyUsuarioDos.nombres = 'Juan';
   dummyUsuarioDos.apellidos = 'Perez';
   dummyUsuarioDos.correoElectronico = 'test@test.com';
