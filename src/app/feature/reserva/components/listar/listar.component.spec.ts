@@ -93,35 +93,35 @@ describe('ListarComponent', () => {
   it('deberia verificar que el usuario existe', () => {
     const telefonoCelular = component.formGroup.get('telefonoCelular');
     telefonoCelular.setValue('300');
-    spyOn(usuarioService, 'listar').and.callFake(() => {
-      return of(dummyUsuarios);
-    });
-    spyOn(reservaService, 'listarPorUsuario').and.callFake(() => {
-      return of(dummyReservas);
-    });
+    const spyUsuario = spyOn(usuarioService, 'listar').and.callFake(() => {
+                        return of(dummyUsuarios);
+                      });
+    const spyReserva = spyOn(reservaService, 'listarPorUsuario').and.callFake(() => {
+                        return of(dummyReservas);
+                      });
 
     component.usuario = dummyUsuarioUno;
     component.usuarios = dummyUsuarios;
 
     component.consultarUsuario();
 
-    expect(usuarioService.listar).toHaveBeenCalled();
-    expect(reservaService.listarPorUsuario).toHaveBeenCalled();
+    expect(spyUsuario).toHaveBeenCalled();
+    expect(spyReserva).toHaveBeenCalled();
   });
 
   it('deberia mostrar mesaje cuando usuario no existe', () => {
     const telefonoCelular = component.formGroup.get('telefonoCelular');
     telefonoCelular.setValue('300');
-    spyOn(usuarioService, 'listar').and.callFake(() => {
-      return of(dummyUsuarios);
-    });
+    const spyUsuario = spyOn(usuarioService, 'listar').and.callFake(() => {
+                        return of(dummyUsuarios);
+                      });
 
     component.usuarios = dummyUsuarios;
     component.usuario = undefined;
 
     component.consultarUsuario();
 
-    expect(usuarioService.listar).toHaveBeenCalled();
+    expect(spyUsuario).toHaveBeenCalled();
   });
 
 });
