@@ -8,8 +8,8 @@ import { UsuarioService } from '../../../usuario/shared/service/usuario.service'
 import { ViviendaService } from '../../../viviendas/shared/service/vivienda.service';
 import { ReservaService } from '../../shared/service/reserva.service';
 import { Usuario } from '../../../usuario/shared/model/usuario';
-// import { of, throwError } from 'rxjs';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
+// import { of } from 'rxjs';
 import { Vivienda } from '../../../viviendas/shared/model/vivienda';
 
 import { CommonModule } from '@angular/common';
@@ -145,16 +145,16 @@ describe('CrearComponent', () => {
     expect(usuarioService.listar).toHaveBeenCalled();
   });
 
-  // it('deberia arrojar un error cuando el backend falle', () => {
-  //   spyOn(usuarioService, 'listar').and.callFake(() => {
-  //     return throwError({
-  //         "nombreExcepcion": 'ExcepcionTecnica',
-  //         "mensaje": 'error inesperado'
-  //       });
-  //   });
-  //   component.consultarUsuario();
-  //   expect(usuarioService.listar).toHaveBeenCalled();
-  // });
+  it('deberia arrojar un error cuando el backend falle', () => {
+    const spyUsuario = spyOn(usuarioService, 'listar').and.callFake(() => {
+                        return throwError({
+                            "nombreExcepcion": 'ExcepcionTecnica',
+                            "mensaje": 'error inesperado'
+                          });
+                      });
+    component.consultarUsuario();
+    expect(spyUsuario).toHaveBeenCalled();
+  });
 
   it('deberia crear una reserva exitosamente', () => {
     component.construirFormularioReserva();
