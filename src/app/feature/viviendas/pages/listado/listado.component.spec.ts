@@ -111,17 +111,17 @@ describe('ListadoComponent', () => {
     });
 
     it('deberia listar viviendas', () => {
-        spyOn(viviendaService, 'listar').and.returnValue(
-            of(dummyViviendas)
-        );
+        spyOn(viviendaService, 'listar').and.callFake(() => {
+            return of(dummyViviendas);
+        });
         component.ngOnInit();
         expect(viviendaService.listar).toHaveBeenCalled();
     });
 
     it('deberia listar archivos', () => {
-        spyOn(archivoService, 'listar').and.returnValue(
-            of(dummyArchivos)
-        );
+        spyOn(archivoService, 'listar').and.callFake(() => {
+            return of(dummyArchivos);
+        });
         component.ngOnInit();
         expect(archivoService.listar).toHaveBeenCalled();
     });
