@@ -111,7 +111,7 @@ describe('ListarComponent', () => {
 
   it('deberia mostrar mesaje cuando usuario no existe', () => {
     const telefonoCelular = component.formGroup.get('telefonoCelular');
-    telefonoCelular.setValue('300');
+    telefonoCelular.setValue('600');
     const spyUsuario = spyOn(usuarioService, 'listar').and.callFake(() => {
                         return of(dummyUsuarios);
                       });
