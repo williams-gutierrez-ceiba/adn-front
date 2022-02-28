@@ -186,4 +186,37 @@ describe('CrearComponent', () => {
     expect(reservaService.crear).toHaveBeenCalled();
   });
 
+  it('deberia arrojar un error al crear una reserva', () => {
+    component.construirFormularioReserva();
+    const fechaInicio = component.formGroup.get('fechaInicio');
+    const fechaFin = component.formGroup.get('fechaFin');
+    fechaInicio.setValue(new Date());
+    fechaFin.setValue(new Date());
+
+    const fechaInicioStr = component.formGroup.get('fechaInicio').value.toISOString();
+    const fechaFinStr = component.formGroup.get('fechaFin').value.toISOString();
+
+    const reserva: Reserva = new Reserva();
+    reserva.fechaInicio = fechaInicioStr.split('T')[0];
+    reserva.fechaFin = fechaFinStr.split('T')[0];
+    reserva.usuarioId = dummyUsuarioUno.telefonoCelular;
+    reserva.viviendaId = dummyVivienda.id;
+    reserva.valorParcial = dummyVivienda.costoDiario;
+    reserva.valorTotal = undefined;
+
+    component.usuario = dummyUsuarioUno;
+    component.usuarios = dummyUsuarios;
+
+    const mensajeError = 'error inesperado';
+    const spyReserva = spyOn(reservaService, 'crear').and.callFake(() => {
+                        return throwError({status: 404, error: {mensaje: mensajeError}});
+                      });
+    const spySnackBar = spyOn(component, 'mostrarSnackbar');
+
+    component.crearReserva();
+
+    expect(spyReserva).toHaveBeenCalled();
+    expect(spySnackBar).toHaveBeenCalledOnceWith(mensajeError);
+  });
+
 });

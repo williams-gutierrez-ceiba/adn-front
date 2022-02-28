@@ -14,7 +14,7 @@ import { MatInputModule } from '@angular/material/input';
 import { RouterTestingModule } from '@angular/router/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Usuario } from '../../../usuario/shared/model/usuario';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
 import { Reserva } from '../../shared/model/reserva';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
@@ -122,6 +122,17 @@ describe('ListarComponent', () => {
     component.consultarUsuario();
 
     expect(spyUsuario).toHaveBeenCalled();
+  });
+
+  it('deberia arrojar un error cuando el backend falle', () => {
+    const mensajeError = 'error inesperado';
+    const spyUsuario = spyOn(usuarioService, 'listar').and.callFake(() => {
+                        return throwError({status: 404, error: {mensaje: mensajeError}});
+                      });
+    const spySnackBar = spyOn(component, 'mostrarSnackbar');
+    component.consultarUsuario();
+    expect(spyUsuario).toHaveBeenCalled();
+    expect(spySnackBar).toHaveBeenCalledOnceWith(mensajeError);
   });
 
 });
