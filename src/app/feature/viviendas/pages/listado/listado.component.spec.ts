@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -19,6 +18,7 @@ import { Archivo } from '../../../archivo/shared/model/archivo';
 
 import {MatDividerModule} from '@angular/material/divider';
 import { MaterialModule } from '../../../material/material.module';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 
 describe('ListadoComponent', () => {
@@ -81,7 +81,7 @@ describe('ListadoComponent', () => {
             declarations: [ ListadoComponent ],
             imports: [
                 CommonModule,
-                HttpClientModule,
+                HttpClientTestingModule,
                 RouterTestingModule,
                 BrowserAnimationsModule,
                 MatFormFieldModule,
@@ -111,19 +111,19 @@ describe('ListadoComponent', () => {
     });
 
     it('deberia listar viviendas', () => {
-        spyOn(viviendaService, 'listar').and.callFake(() => {
-            return of(dummyViviendas);
-        });
+        const spyVivienda = spyOn(viviendaService, 'listar').and.callFake(() => {
+                                return of(dummyViviendas);
+                            });
         component.ngOnInit();
-        expect(viviendaService.listar).toHaveBeenCalled();
+        expect(spyVivienda).toHaveBeenCalled();
     });
 
     it('deberia listar archivos', () => {
-        spyOn(archivoService, 'listar').and.callFake(() => {
-            return of(dummyArchivos);
-        });
+        const spyArchivo = spyOn(archivoService, 'listar').and.callFake(() => {
+                                return of(dummyArchivos);
+                            });
         component.ngOnInit();
-        expect(archivoService.listar).toHaveBeenCalled();
+        expect(spyArchivo).toHaveBeenCalled();
     });
 
     it('debería asignar correctamente los archivos a las viviendas', () => {
