@@ -15,7 +15,7 @@ describe('SecurityGuard', () => {
 
   it('should return true', () => {
     const value = true;
-    let guard: SecurityGuard = TestBed.inject(SecurityGuard);
+    const guard: SecurityGuard = TestBed.inject(SecurityGuard);
     guard.canActivate();
     expect(guard.canActivate()).toBe(value);
   });
