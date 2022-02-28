@@ -147,8 +147,8 @@ describe('CrearComponent', () => {
   it('deberia arrojar un error cuando el backend falle', () => {
     spyOn(usuarioService, 'listar').and.returnValue(
       throwError({
-        "nombreExcepcion": 'ExcepcionTecnica',
-        "mensaje": 'error inesperado',
+        'nombreExcepcion': 'ExcepcionTecnica',
+        'mensaje': 'error inesperado',
       }));
     component.consultarUsuario();
     expect(usuarioService.listar).toHaveBeenCalled();
