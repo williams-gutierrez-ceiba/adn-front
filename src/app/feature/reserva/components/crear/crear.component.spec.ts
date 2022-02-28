@@ -13,7 +13,6 @@ import { of, throwError } from 'rxjs';
 import { Vivienda } from '../../../viviendas/shared/model/vivienda';
 
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -24,6 +23,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Reserva } from '../../shared/model/reserva';
 
 import { Router } from '@angular/router';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('CrearComponent', () => {
   let component: CrearComponent;
@@ -76,7 +76,7 @@ describe('CrearComponent', () => {
         ReactiveFormsModule,
         FormsModule,
         CommonModule,
-        HttpClientModule,
+        HttpClientTestingModule,
         RouterTestingModule,
         ReactiveFormsModule,
         MatSnackBarModule,
@@ -146,14 +146,14 @@ describe('CrearComponent', () => {
   });
 
   it('deberia arrojar un error cuando el backend falle', () => {
+    const mensajeError = 'error inesperado';
     const spyUsuario = spyOn(usuarioService, 'listar').and.callFake(() => {
-                        return throwError({
-                            "nombreExcepcion": 'ExcepcionTecnica',
-                            "mensaje": 'error inesperado'
-                          });
+                        return throwError({status: 404, error: {mensaje: mensajeError}})
                       });
+    const spySnackBar = spyOn(component, 'mostrarSnackbar');
     component.consultarUsuario();
     expect(spyUsuario).toHaveBeenCalled();
+    expect(spySnackBar).toHaveBeenCalledOnceWith(mensajeError);
   });
 
   it('deberia crear una reserva exitosamente', () => {
