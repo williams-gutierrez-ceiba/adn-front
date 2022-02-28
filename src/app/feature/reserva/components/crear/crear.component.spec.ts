@@ -148,7 +148,7 @@ describe('CrearComponent', () => {
   it('deberia arrojar un error cuando el backend falle', () => {
     const mensajeError = 'error inesperado';
     const spyUsuario = spyOn(usuarioService, 'listar').and.callFake(() => {
-                        return throwError({status: 404, error: {mensaje: mensajeError}})
+                        return throwError({status: 404, error: {mensaje: mensajeError}});
                       });
     const spySnackBar = spyOn(component, 'mostrarSnackbar');
     component.consultarUsuario();
