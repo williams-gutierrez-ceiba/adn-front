@@ -5,7 +5,6 @@ import { UsuarioService } from '../../../usuario/shared/service/usuario.service'
 import { HttpService } from 'src/app/core/services/http.service';
 
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -13,12 +12,12 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-// import { of, throwError } from 'rxjs';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
 import { Usuario } from '../../../usuario/shared/model/usuario';
 import { Vivienda } from '../../../viviendas/shared/model/vivienda';
 import { ListadoComponent } from '../../../viviendas/pages/listado/listado.component';
 import { Router } from '@angular/router';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 
 describe('LoginComponent', () => {
@@ -71,7 +70,7 @@ describe('LoginComponent', () => {
           { path: './viviendas/listado', component: ListadoComponent, pathMatch: 'full' }
         ]),
         CommonModule,
-        HttpClientModule,
+        HttpClientTestingModule,
         RouterTestingModule,
         ReactiveFormsModule,
         MatSnackBarModule,
@@ -130,15 +129,15 @@ describe('LoginComponent', () => {
     expect(router.navigate).toHaveBeenCalledWith(['./viviendas/listado']);
   });
 
-  // it('deberia arrojar un error cuando el backend falle', () => {
-  //   spyOn(usuarioService, 'listar').and.callFake(() => {
-  //     return throwError({
-  //         "nombreExcepcion": 'ExcepcionTecnica',
-  //         "mensaje": 'error inesperado'
-  //       });
-  //   });
-  //   component.consultarUsuario();
-  //   expect(usuarioService.listar).toHaveBeenCalled();
-  // });
+  it('deberia arrojar un error cuando el backend falle', () => {
+    const mensajeError = 'error inesperado';
+    const spyUsuario = spyOn(usuarioService, 'listar').and.callFake(() => {
+                        return throwError({status: 404, error: {mensaje: mensajeError}});
+                      });
+    const spySnackBar = spyOn(component, 'mostrarSnackbar');
+    component.consultarUsuario();
+    expect(spyUsuario).toHaveBeenCalled();
+    expect(spySnackBar).toHaveBeenCalledOnceWith(mensajeError);
+  });
 
 });
